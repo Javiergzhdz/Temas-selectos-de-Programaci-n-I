@@ -2,11 +2,11 @@
 
 # Descripcion
 
-El programa sirve para
-
+El programa sirve paraa
 ## Desarrollo
 Desarrollo del problema
 
 # Conclusiones
 
-Conclusiones, observaciones y puntos de mejorar 
+Conclusiones, observaciones y puntos de mejorar
+funciona cosa  
