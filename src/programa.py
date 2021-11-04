@@ -2,7 +2,12 @@
 
 import rospy
 from nav_msgs.msg import Odometry
-from robot_comm.msg import Estatus
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import LaserScan
+import time
+turn = False
+forward = False
+stop = False
 
 def process_msg_callback(msg):
 
@@ -15,38 +20,35 @@ def process_msg_callback(msg):
 
 
 
-    command = str(
-        raw_input('Escribir el comando'))
+    command = "Avanzar" 
+    """str(
+        raw_input('Escribir el comando'))"""
     if command == "Avanzar":
-        forward = True
-    elif command == "Gira":
-        angle = int(
-        raw_input('Meta la velocidad en radianes: '))
-        turn = True
-        angle = angle * 3.14 /180
-    elif command == "Detente":
-        stop = True
-    else:
-        pubmsg.estado = 'Error solo se admite Avanzar, Gira o Detente'
-
-    if turn:
-        msg.twist.twist.angular.z = angle
-    elif forward:
         msg.twist.twist.linear.x = 1
-    elif stop:
+    elif command == "Gira":
+        angle = 90
+        """int(
+        raw_input('Meta la velocidad en radianes: '))"""
+        angle = angle * 3.14 /180
+        msg.twist.twist.angular.z = angle
+    elif command == "Detente":
         msg.twist.twist.linear.x = 0
         msg.twist.twist.linear.y = 0
         msg.twist.twist.linear.z = 0
         msg.twist.twist.angular.x = 0
         msg.twist.twist.angular.y = 0
+    else:
+        str('META ALGO VALIDO')
+
+        
 
 
 
 rospy.init_node('programa')
 sub = rospy.Subscriber('odom', Odometry, process_msg_callback)
-pub = rospy.Publisher('estatus',Estatus, queue_size=2)
+#pub = rospy.Publisher('estatus',Estatus, queue_size=2)
 rate = rospy.Rate(2)
-pubmsg = Estatus()
+#pubmsg = Estatus()
 rospy.spin()
 
 """
