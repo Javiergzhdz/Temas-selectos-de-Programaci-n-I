@@ -1,3 +1,3 @@
 #Contenido del mensaje Estatus.msg
-string estado
-int32 codigo
+string comando
+float32 valor
