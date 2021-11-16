@@ -11,6 +11,7 @@
 
 - [Objetivo](#objetivo)
 - [Desarrollo](#desarrollo)
+- [Funcionamiento](#funcionamiento)
 - [Conclusiones](#conclusiones)
 - [Autor](#autor)
 
