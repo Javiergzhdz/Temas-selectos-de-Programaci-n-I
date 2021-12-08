@@ -53,7 +53,7 @@ Distance Accuracy (120mm ~ 499mm) 	±15mm
 Distance Accuracy(500mm ~ 3,500mm) 	±5.0%
 Distance Precision(120mm ~ 499mm) 	±10mm
 Distance Precision(500mm ~ 3,500mm) 	±3.5%
-Rango angular 	360°
+Rango angular  	360°
 Resolucion angular 	1°
 
 #### Raspberry Pi Camera Module 2
