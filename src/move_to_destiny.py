@@ -7,9 +7,10 @@ from geometry_msgs.msg import Twist
 distObstacle = 1
 
 def callback(msg):
+    #manda la distancia al obstaculo
     rospy.loginfo(rospy.get_caller_id() + " The distance to obstacle is - %s",msg.ranges[300]) #prints on terminal
 
-    #if hte distance to an obstacle in front of the robot is bigger than 1 meter, the robot will move forward
+    #if thte distance to an obstacle in front of the robot is bigger than 1 meter, the robot will move forward
     if msg.ranges[300] > distObstacle:
         move.linear.x = 0.5
         move.angular.z = 0.0

@@ -45,45 +45,50 @@ TurtleBot puede correr SLAM (simultaneos localization and mapping), algoritmos q
 -El Laser Distance Sensor (LDS) es un scanner laser capas de sensar 360 grados, que recolecta un conjunto de informacion alrededor del robot, esto para ser usado en SLAM y Navegacion
 - Soporta interface USB y es facil de instalar en una computadora. 
 - Puede soportar UART
+- 5V DC ±5%
+- Distancia de deteccion 120mm ~ 3,500mm
+- Sampling Rate 1.8kHz
 
-https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/
+Distance Accuracy (120mm ~ 499mm) 	±15mm
+Distance Accuracy(500mm ~ 3,500mm) 	±5.0%
+Distance Precision(120mm ~ 499mm) 	±10mm
+Distance Precision(500mm ~ 3,500mm) 	±3.5%
+Rango angular 	360°
+Resolucion angular 	1°
 
+#### Raspberry Pi Camera Module 2
+La camara puede ser usada para videos de alta definicion asi como parafotografias. Soporta 1080p30, 720p60 y VGA90 modulos de videojuegos.
 
-https://www.raspberrypi.com/products/camera-module-v2/
-
-https://emanual.robotis.com/docs/en/platform/turtlebot3/features/
-
-https://repository.usta.edu.co/bitstream/handle/11634/18667/2019davidmartinez.pdf?sequence=1&isAllowed=y
 
 ## Desarrollo
-Se creo la carpeta msg donde se creo un archivo .msg que contenia el comando y el valor
-Despues se creo la carpeta src se hizo el programa, esto a partir de clases, variables, funciones, publicadores y subscriptores.
-El codigo se documento con lo que hace cada linea de codigo
-Despues se probo en gazebo, y funciono de acuerdo a lo esperado.
+El programa consta de dos programas.
+## [tarea2.py](https://github.com/Javiergzhdz/Temas-selectos-de-Programaci-n-I/blob/main/src/tarea2.py)
+es el programa el cual ayuda al robot a llegar al distino. Basicamente hace que el robot gire de tal forma que al momento de avanzar en linea recta, vaya en direccion a el objetivo. Si por alguna razon el robot no va en linea recta y se desvia, el robot girara para corregir el rumbo
+## [move_to_destiny.py](https://github.com/Javiergzhdz/Temas-selectos-de-Programaci-n-I/blob/main/src/move_to_destiny.py)
+Le indica al robot, que si el sensor LDS encuentra un obstaculo, el robot lo debe evadir. En su caso el robot lo puede evadir ya sea girando a la izquierda o la derecha. una vez que lo evade continua moviendose en direccion al objetivo
 
 ## Funcionamiento
 Primero ejecutar
 
 ```
-~/rosdev/catkin_ws/src$ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+~/rosdev/catkin_ws/src/robot_comm$ roslaunch turtlebot3_gazebo turtlebot3_any_world.launch
 ```
 Despues ejecutar
 ```
-~/rosdev/catkin_ws rosrun robot_comm programa.py
+~/rosdev/catkin_ws/src/robot_comm$ rosrun robot_comm tarea2.py
 ```
 
 En otra pestaña ejecutar
 ```
-~/rosdev/catkin_ws$ rostopic pub /cmd_robot robot_comm/Comunication "comando: ''
-valor: "
+~/rosdev/catkin_ws/src/robot_comm$ rosrun robot_comm move_to_destiny.py
 ```
 En comando meter la cadena avanza, detente o gira
 en valor para los comandos 'avanza' y 'gira' se especifica un valor
 
 ## Conclusiones
-Para usar ROS en consola, se necesita llevar un registro de los comandos utilizados. Pues de no tenerlo es sumamente complicado hacer cualquier cosa.
-En cuanto a Python es importante tener el conocimiento de que es una clase y como funciona. Gran parte del codigo no lo entendia debido a que nunca me quedo claro como funcionaban la clases en python.
-Subir archivos a Github es una herramienta de gran ayuda
+Con las herramientas que nos proporciona ROS, podemos automatizar a los robots. 
+Haciendo uso de los sensores con los que los robots cuentan, se pueden realizar distintos procesos. Por ejemplo en el caso de esta actividad se puede programar para que el robot llegue a cierta posicion aunque haya obstaculos en el camino. Pues con la informacion que capta el robot, se pueden programar rutinas que, en este caso, indiquen que debe de evitar un obstaculo.
+Cabe mencionar que debido a una circunstancia que desconosco, en la simulacion el robot no evita el obstaculo, choca contra el y da una vuelta de casi 360 grados en sentido antihorario, avanza, vuelve a chocar y repite el proceso. Pero si no se cuenta con ningun obstaculo, el robot llega a el punto meta indicado.
 
 ## Autor
 
